@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import FixUp from "../components/FixUp";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAll, maxLimits, setCount, setLimit } from "../state/FixSlice";
+import legendary from '../assets/legendary_lvl.svg'
+import coin from '../assets/coin.svg'
+import energy from '../assets/energy.svg'
 
 const MainPage = () => {
   const {maxLimitLevel, count, limit} = useSelector(state => state.fix);
@@ -48,6 +51,10 @@ const MainPage = () => {
     <div className="container">
       <div className="w-screen flex flex-col gap-20 items-center justify-center">
         <div className="w-[50%] flex flex-col items-center">
+          <div className="flex justify-center text-center items-center">
+            <img className="w-[100px]" src={coin} alt="" />
+            <p className="text-7xl font-normal">{count}</p>
+          </div>
           <div className="flex justify-between text-[5em] w-full">
             <p>{count}</p>
             <p>{maxCount[level].count}</p>
@@ -60,10 +67,15 @@ const MainPage = () => {
           </div>
         </div>
         <button
-          className="w-[70em] h-[70em] border-8 border-[blue] bg-blue-800 rounded-full active:scale-[.99] flex justify-center items-center"
+          className="w-[70em] h-[70em] border-[40px] border-blue-700 bg-blue-950 rounded-full active:scale-[.99] flex justify-center items-center"
           onClick={handleClick}
-        />
-        <span className="text-[5em] font-semibold">Limit {limit} / {maxLimits[maxLimitLevel-1]?.maxLimit}</span>
+        >
+          <div className="flex w-[40em] h-[40em]  bg-blue-500 rounded-full active:scale-[.99] justify-center items-center">
+          </div>
+          <img className="w-[38%] absolute" src={legendary} alt="" />
+
+        </button>
+        <span className="text-[5em] flex items-center font-semibold">Limit <img className="w-16 ml-10" src={energy} alt="" /> {limit} / {maxLimits[maxLimitLevel-1]?.maxLimit}</span>
         <FixUp/>
         <div className="text-[3em] text-white px-[.5em] py-[.2em] bg-red-600 rounded-[.5em]">
           <button onClick={handleDeleteAll}>Deleta All</button>
