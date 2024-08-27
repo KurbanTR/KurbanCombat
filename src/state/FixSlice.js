@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit"
 export const maxLimits = [
     {
         maxLimit: 100,
-        price: 100,
     },
     {
         maxLimit: 200,
@@ -30,14 +29,19 @@ export const maxLimits = [
 const FixSlice = createSlice({
     name: 'fix',
     initialState: {
-        count: localStorage.getItem('count') || 0,
-        click: localStorage.getItem('click') || 1,
-        maxLimitLevel: localStorage.getItem('maxLimitLevel') || 1
+        count: Number(localStorage.getItem('count')) || 200,
+        limit: Number(localStorage.getItem('limit')) || maxLimits[Number(localStorage.getItem('maxLimitLevel'))]?.maxLimit || 100,
+        click: Number(localStorage.getItem('click')) || 1,
+        maxLimitLevel: Number(localStorage.getItem('maxLimitLevel')) || 1
     },
     reducers: {
         setCount(state, actions){
             state.count = actions.payload
             localStorage.setItem('count', actions.payload)
+        },
+        setLimit(state, actions){
+            state.limit = actions.payload
+            localStorage.setItem('limit', actions.payload)
         },
         setClick(state, actions){
             state.click = actions.payload
@@ -59,5 +63,5 @@ const FixSlice = createSlice({
 })
 
 
-export const { setClick, setMaxLimitLevel, deleteAll, setCount } = FixSlice.actions
+export const { setClick, setMaxLimitLevel, deleteAll, setCount, setLimit } = FixSlice.actions
 export default FixSlice.reducer

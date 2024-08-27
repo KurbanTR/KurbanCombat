@@ -1,46 +1,48 @@
 import { useEffect, useState } from "react";
 import FixUp from "../components/FixUp";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAll, maxLimits, setCount } from "../state/FixSlice";
+import { deleteAll, maxLimits, setCount, setLimit } from "../state/FixSlice";
 
 const MainPage = () => {
-  const {maxLimitLevel, count} = useSelector(state => state.fix)
+  const {maxLimitLevel, count, limit} = useSelector(state => state.fix);
   const [level, setLevel] = useState(1);
-  const [limit, setLimit] = useState(maxLimits[maxLimitLevel-1]?.maxLimit);
 
   const dispatch = useDispatch()
   
   const handleClick = () => {
-    console.log(limit);      
-    setLimit((prevLimit) => {
-      if (prevLimit >= 3) {
-        dispatch(setCount(+count + 3));
-        return prevLimit - 3;
-      }
-      return prevLimit;
-    });
+    console.log(limit);
+  
+    if (limit >= 3) {
+      dispatch(setCount(+count + 3));
+      dispatch(setLimit(+limit - 3));
+    } else {
+      dispatch(setLimit(limit));
+    }
   };
 
   const handleDeleteAll = ()=>{
     dispatch(deleteAll())
   }
   
-  const maxCount = [100, 2500, 10000, 500000, 1000000, 10000000];
-  const levelWidth = (count / maxCount[level]) * 100;
+  const maxCount = [{name: 'Bronze', count: 5000}, {name: 'Silver', count: 25000}, {name: 'Gold', count: 100000}, {name: 'Platinum', count: 1000000}, {name: 'Diamond', count: 5000000}, {name: 'Epic', count: 10000000}, {name: 'Legendary', count: 50000000}, {name: 'Master', count: 100000000}, {name: 'Grandmaster', count: 1000000000}, {name: 'Lord', count: 18000000000}, {name: 'Creator', count: 'Max'}];
+  const levelWidth = (count / maxCount[level]?.count) * 100;
 
   useEffect(() => {
-    if (maxCount[maxLimitLevel-1]?.maxLimit <= count) {
+    if (maxCount[level]?.count <= count) {
       setLevel(level + 1);
     }
   }, [count]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setLimit((prevLimit) => (prevLimit < maxLimits[maxLimitLevel-1]?.maxLimit ? prevLimit + 3 : prevLimit));
+      const currentLimit = limit < maxLimits[maxLimitLevel - 1]?.maxLimit 
+                          ? +limit + 3 
+                          : limit;
+      dispatch(setLimit(currentLimit));
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [limit, maxLimitLevel, dispatch]);
 
   return (
     <div className="container">
@@ -48,7 +50,7 @@ const MainPage = () => {
         <div className="w-[50%] flex flex-col items-center">
           <div className="flex justify-between text-[5em] w-full">
             <p>{count}</p>
-            <p>{maxCount[level]}</p>
+            <p>{maxCount[level].count}</p>
           </div>
           <div className="h-[3em] w-full rounded-full bg-slate-500 overflow-hidden">
             <div
