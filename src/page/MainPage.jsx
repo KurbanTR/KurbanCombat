@@ -66,15 +66,15 @@ const MainPage = () => {
             />
           </div>
         </div>
+
         <button
-          className="w-[70em] h-[70em] border-[40px] border-blue-700 bg-blue-950 rounded-full active:scale-[.99] flex justify-center items-center"
+          className="w-[70em] h-[70em] border-[40px] border-blue-700 bg-gradient-to-b from-[#35389E] to-[#1C2848] rounded-full active:scale-[.99] flex justify-center items-center"
           onClick={handleClick}
         >
-          <div className="flex w-[40em] h-[40em]  bg-blue-500 rounded-full active:scale-[.99] justify-center items-center">
-          </div>
-          <img className="w-[38%] absolute" src={legendary} alt="" />
-
+          <div className="flex w-[40em] h-[40em] blur-[47.08px] bg-white bg-opacity-50 rounded-full active:scale-[.99] justify-center items-center"/>
+          <img className="w-[600px] absolute" src={legendary} alt="" />
         </button>
+
         <span className="text-[5em] flex items-center font-semibold">Limit <img className="w-16 ml-10" src={energy} alt="" /> {limit} / {maxLimits[maxLimitLevel-1]?.maxLimit}</span>
         <FixUp/>
         <div className="text-[3em] text-white px-[.5em] py-[.2em] bg-red-600 rounded-[.5em]">
