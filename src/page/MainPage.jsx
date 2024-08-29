@@ -52,16 +52,19 @@ const MainPage = () => {
       <div className="w-screen flex flex-col gap-20 items-center justify-center">
         <div className="w-[50%] flex flex-col items-center">
           <div className="flex justify-center text-center items-center">
-            <img className="w-[100px]" src={coin} alt="" />
-            <p className="text-7xl font-normal">{count}</p>
+            <img className="w-[8vw]" src={coin} alt="" />
+            <p className="text-[4vw] font-semibold relative top-[1vw]">{count}</p>
           </div>
-          <div className="flex justify-between text-[5em] w-full">
-            <p>{count}</p>
-            <p>{maxCount[level].count}</p>
+          <div className="flex justify-between text-[5em] pb-[.3em] w-full">
+            <p className="text-[.5em]">{maxCount[level].name}</p>
+            <span className="flex gap-[.3em] items-end text-[.5em] font-semibold">
+              <p className="text-gray-500">Level</p>
+              <p>{level}/{maxCount.length}</p>
+            </span>
           </div>
-          <div className="h-[3em] w-full rounded-full bg-slate-500 overflow-hidden">
+          <div className="h-[3em] w-full rounded-full border-[#555555] border-opacity-75 border-[2px] bg-[#32363C] overflow-hidden">
             <div
-              className="bg-violet-400 rounded-full h-[3em]"
+              className="bg-gradient-to-r from-[#ADFAA1] vio-[#C597CC] to-[#2F39A3] rounded-full h-[3em]"
               style={{ width: `${levelWidth}%` }}
             />
           </div>
@@ -75,7 +78,10 @@ const MainPage = () => {
           <img className="w-[600px] absolute" src={legendary} alt="" />
         </button>
 
-        <span className="text-[5em] flex items-center font-semibold">Limit <img className="w-16 ml-10" src={energy} alt="" /> {limit} / {maxLimits[maxLimitLevel-1]?.maxLimit}</span>
+        <span className="text-[4em] flex items-center gap-[.4em] font-semibold">
+          <img className="w-20 ml-10" src={energy} alt="" /> 
+          {limit} / {maxLimits[maxLimitLevel-1]?.maxLimit}
+        </span>
         <FixUp/>
         <div className="text-[3em] text-white px-[.5em] py-[.2em] bg-red-600 rounded-[.5em]">
           <button onClick={handleDeleteAll}>Deleta All</button>
