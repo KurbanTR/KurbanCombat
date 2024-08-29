@@ -50,14 +50,14 @@ const MainPage = () => {
   return (
     <div className="container">
       <div className="w-screen flex flex-col gap-20 items-center justify-center">
-        <div className="w-[50%] flex flex-col items-center">
-          <div className="flex justify-center text-center items-center">
-            <img className="w-[8vw]" src={coin} alt="" />
-            <p className="text-[4vw] font-semibold relative top-[1vw]">{count}</p>
+        <div className="lg:w-[50%] w-full flex flex-col items-center">
+          <div className="flex mb-10 lg:mb-0 justify-center text-center items-center">
+            <img className="lg:w-[8vw] w-[10vw] md:w-[12vw]" src={coin} alt="" />
+            <p className="lg:text-[4vw] text-[8vw] font-semibold relative top-[1vw]">{count}</p>
           </div>
-          <div className="flex justify-between text-[5em] pb-[.3em] w-full">
-            <p className="text-[.5em]">{maxCount[level].name}</p>
-            <span className="flex gap-[.3em] items-end text-[.5em] font-semibold">
+          <div className="flex justify-between items-center text-[5em] pb-[.3em] w-full">
+            <p className="lg:text-[.5em] text-4xl">{maxCount[level].name}</p>
+            <span className="flex gap-[.3em] items-end lg:text-[.5em] text-4xl font-semibold">
               <p className="text-gray-500">Level</p>
               <p>{level}/{maxCount.length}</p>
             </span>
@@ -71,19 +71,19 @@ const MainPage = () => {
         </div>
 
         <button
-          className="w-[70em] h-[70em] border-[40px] border-blue-700 bg-gradient-to-b from-[#35389E] to-[#1C2848] rounded-full active:scale-[.99] flex justify-center items-center"
+          className="lg:w-[70em] w-[25em] h-[25em] lg:h-[70em] border-[20px] lg:border-[40px] border-blue-700 bg-gradient-to-b from-[#35389E] to-[#1C2848] rounded-full active:scale-[.99] flex justify-center items-center"
           onClick={handleClick}
         >
-          <div className="flex w-[40em] h-[40em] blur-[47.08px] bg-white bg-opacity-50 rounded-full active:scale-[.99] justify-center items-center"/>
-          <img className="w-[600px] absolute" src={legendary} alt="" />
+          <div className="flex lg:w-[40em] w-[10em] h-[10em] lg:h-[40em] blur-[47.08px] bg-white bg-opacity-50 rounded-full active:scale-[.99] justify-center items-center"/>
+          <img className="lg:w-[600px] w-[200px] absolute" src={legendary} alt="" />
         </button>
 
-        <span className="text-[4em] flex items-center gap-[.4em] font-semibold">
-          <img className="w-20 ml-10" src={energy} alt="" /> 
+        <span className="lg:text-[4em] text-[2em] flex items-center gap-[.4em] font-semibold">
+          <img className="lg:w-20 w-8" src={energy} alt="" /> 
           {limit} / {maxLimits[maxLimitLevel-1]?.maxLimit}
         </span>
         <FixUp/>
-        <div className="text-[3em] text-white px-[.5em] py-[.2em] bg-red-600 rounded-[.5em]">
+        <div className="text-[3em] text-white lg:px-[.5em] lg:py-[.2em] px-[1.9em] py-[0.5em] bg-red-600 rounded-[.5em]">
           <button onClick={handleDeleteAll}>Deleta All</button>
         </div>
       </div>
